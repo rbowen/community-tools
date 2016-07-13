@@ -5,7 +5,7 @@ import sys
 # sizes, which works fairly well in Europe. Might want to skew larger
 # for US events.
 
-shirts = int(sys.argv[1])
+shirts = input("How many shirts? ")
 
 print "For a total of " + str(shirts) + " shirts, order:\n";
 
