@@ -1,22 +1,14 @@
 #!/usr/bin/python
 
 # How many followers do you have?
-import urllib2
+import urllib.request
 import re
 
-feeds = ['redhatopen',
-        'gluster',
-        'ovirt',
-        'rdocommunity',
-        'ceph',
-        'projectatomic',
-        'fedora',
-        'manageiq',
-        'centos',
-        'centosevents',
-        'openshift'];
+feeds = [
+        'centosproject',
+        ];
 for feed in feeds:
-    response = urllib2.urlopen('https://twitter.com/' + feed)
-    html = response.read()
-    print feed + ': ' + re.search('.*?([\d,]+ Followers).*', html).group(1)
+    response = urllib.request.urlopen('https://twitter.com/' + feed)
+    html = response.read().decode('utf-8')
+    print ( feed + ': ' + re.search('.*?([\d,]+ Followers).*', html).group(1) )
 
