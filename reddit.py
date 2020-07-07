@@ -5,7 +5,7 @@ import urllib.request
 import re
 
 subreds = [
-         'CentOS','redhat','gluster','ovirt','ceph','Fedora','openshift','ansible'
+        'CentOS','redhat','gluster','ovirt','ceph','Fedora','openshift','ansible'
          ];
 for subred in subreds:
     req = urllib.request.Request( 'https://reddit.com/r/' + subred,
@@ -20,7 +20,7 @@ for subred in subreds:
 #  Looks like ...
 #           <div class="_3XFx6CfPlg-4Usgxm0gK8R">13.3k</div><p class="_29_mu5qI8E1fq6Uq5koje8" id="IdCard--Subscribers--undefined--t5_2s6fk">Members</p>
 # or ...
-# "subscribers":13252,
+# "subscribersCount":13252,
 
-    print ( subred + ': ' + re.search('.*?"subscribers":([\d]+?),', html).group(1) )
+    print ( subred + ': ' + re.search('.*?"subscribersCount":([\d]+?),', html).group(1) )
 
