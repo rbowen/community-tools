@@ -17,7 +17,7 @@ print "Rounding up the ponies ..."
 key = "YourMeetups.comKeyGoesHere"
 
 # What are you looking for?
-keyword = sys.argv[1]
+keyword = sys.argv[1] if len(sys.argv) >= 2 else 'apache'
 
 # Anywhere in the world ...
 url = "https://api.meetup.com/2/open_events?&sign=true&photo-host=public&state=ky&city=lexington&country=usa&text=" + keyword + "&radius=10000&sign=true&key=" + key
