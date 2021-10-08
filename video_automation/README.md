@@ -31,9 +31,16 @@ The process for generating a video is:
 
 For each video:
 
-Trim off any dead air at the beginning of the video:
+Trim off any dead air at the beginning (and, optionally, end) of the video:
 
-    ./trim raw_video.mp4 123
+    ./trim raw_video.mp4 "00:01:23"
+
+or
+
+    ./trim raw_video.mp4 "00:01:23" "17:18:23"
+
+Note: Trim retains a backup copy of your original video, in case you do
+this part wrong.
 
 Generate the title card using `generate_title`
 
