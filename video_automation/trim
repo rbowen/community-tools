@@ -13,10 +13,6 @@ my $time = $ARGV[1] || help();
 
 my $end = $ARGV[2] ? " -to \"$ARGV[2]\" " : '';
 
-if ($end) {
-    $end = " -to \"$end\" ";
-}
-
 unless (-e $file) {
     print "Can't find file '$file'\n";
     help();
