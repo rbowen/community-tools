@@ -15,6 +15,12 @@ help() if $help;
 my $title  = $ARGV[0] || help();
 my $author = $ARGV[1] || help();
 my $wrap_title = wrap( '', '', $title );
+
+unless (-e 'template_title.png') {
+    print "template_title.png is missing. See template_title_EXAMPLE.png for an example of the correct file size for YouTube videos.";
+    help();
+}
+
 qx/convert template_title.png -font Montserrat-Regular -pointsize $fontsize -annotate +75+350 \"$wrap_title\n\n$author\" titlecard.png/;
 
 sub help {
