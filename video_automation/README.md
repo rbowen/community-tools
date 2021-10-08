@@ -12,7 +12,9 @@ To use generate_title you might need to:
     sudo cpan install Text::Wrap
     sudo cpan install Getopt::Long
 
-You will also need to have mlt-melt installed.
+You will also need to have `mlt-melt` installed. On Fedora, that's:
+
+    sudo dnf install mlt
 
 Next, you need to create the following files:
 
