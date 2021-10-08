@@ -11,7 +11,7 @@ help() if $help;
 my $file = $ARGV[0] || help();
 my $time = $ARGV[1] || help();
 
-my $end = $ARGV[2] ? " -to $ARGV[2] " : '';
+my $end = $ARGV[2] ? " -to \"$ARGV[2]\" " : '';
 
 if ($end) {
     $end = " -to \"$end\" ";
