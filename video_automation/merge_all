@@ -42,7 +42,7 @@ my $orig = $file . '.mp4';
 my $final = $file . '_final.mp4';
 
 # Build the command
-my $command = qq{mlt-melt -profile atsc_1080p_2997 TITLECARD.png out=120 $preroll \"$orig\" -mix 30 -mixer luma endcard.png out=240 -mix 30 -mixer luma -consumer avformat:\"$final\" v=libx264 preset=slow crf=18 a=copy pix_fmt=yuv420p strict=-2};
+my $command = qq{mlt-melt -profile atsc_1080p_2997 titlecard.png out=120 $preroll \"$orig\" -mix 30 -mixer luma endcard.png out=240 -mix 30 -mixer luma -consumer avformat:\"$final\" v=libx264 preset=slow crf=18 a=copy pix_fmt=yuv420p strict=-2};
 
 # print "Running this: \n$command\n";
 

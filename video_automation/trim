@@ -29,7 +29,7 @@ my $trimmed = $file . "_edit.mp4";
 my $bak = $file . "_bak.mp4";
 
 # ok, now the nasty work
-qx/ffmpeg -noaccurate_seek -i $orig -ss "$time" $end -c copy $trimmed/;
+qx/ffmpeg -noaccurate_seek -ss "$time" $end -i $orig -c copy $trimmed/;
 qx/mv $orig $bak/;
 qx/mv $trimmed $orig/;
 
