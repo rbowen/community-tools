@@ -20,6 +20,9 @@ Next, you need to create the following files:
     endcard.png
     preroll.mp4 (optional)
 
+The various `EXAMPLE` files will give you a template to work from, and
+an idea of necessary file formats/sizes/resolution for YouTube.
+
 ## Usage
 
 The process for generating a video is:
