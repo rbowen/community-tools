@@ -1,6 +1,6 @@
 # Video production toolchain
 
-These tools take raw video and adds a pre-roll, title card, and endcard.
+These tools take raw video and adds a (optional) pre-roll, title card, and endcard.
 
 ## Setup
 
