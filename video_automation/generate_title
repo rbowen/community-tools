@@ -15,12 +15,12 @@ help() if $help;
 my $title  = $ARGV[0] || help();
 my $author = $ARGV[1] || help();
 my $wrap_title = wrap( '', '', $title );
-qx/convert TEMPLATE_TITLE.png -font Montserrat-Regular -pointsize $fontsize -annotate +75+350 \"$wrap_title\n\n$author\" TITLECARD.png/;
+qx/convert template_title.png -font Montserrat-Regular -pointsize $fontsize -annotate +75+350 \"$wrap_title\n\n$author\" titlecard.png/;
 
 sub help {
 
 print qq~
-Given a TEMPLATE_TITLE.png file, a title, and a speaker name, generates the title card for a YouTube video.
+Given a template_title.png file, a title, and a speaker name, generates the title card for a YouTube video.
 Usage: $0 "TITLE" "SPEAKER"
 Eg: $0 "Introduction to ponies" "Rich Bowen"
 
