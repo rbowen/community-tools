@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long qw(GetOptions);
+
+use Text::Wrap;
+$Text::Wrap::columns = 50;
+my $fontsize = 35;
+
+my $help = 0;
+
+GetOptions( "help" => \$help ) or help();
+help() if $help;
+
+my $title  = $ARGV[0] || help();
+my $author = $ARGV[1] || help();
+my $wrap_title = wrap( '', '', $title );
+qx/convert TEMPLATE_TITLE.png -font Montserrat-Regular -pointsize $fontsize -annotate +75+350 \"$wrap_title\n\n$author\" TITLECARD.png/;
+
+sub help {
+
+print qq~
+Given a TEMPLATE_TITLE.png file, a title, and a speaker name, generates the title card for a YouTube video.
+Usage: $0 "TITLE" "SPEAKER"
+Eg: $0 "Introduction to ponies" "Rich Bowen"
+
+~;
+    exit();
+}

@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Getopt::Long qw(GetOptions);
+
+my $help = 0;
+GetOptions("help" => \$help) or help();
+help() if $help;
+
+my $file = $ARGV[0] || help();
+my $time = $ARGV[1] || help();
+
+unless (-e $file) {
+    print "Can't find file '$file'\n";
+    help();
+}
+
+unless ($file =~ /\.mp4$/) {
+    print "That's not an mp4 file. Refusing to trim it.\n";
+    help();
+}
+
+$file =~ s/\.mp4$//;
+my $orig = $file . ".mp4";
+my $trimmed = $file . "_edit.mp4";
+my $bak = $file . "_bak.mp4";
+
+# ok, now the nasty work
+qx/ffmpeg -noaccurate_seek -ss $time -i $orig -c copy $trimmed/;
+qx/mv $orig $bak/;
+qx/mv $trimmed $orig/;
+
+sub help {
+    print "\nTrims the first n seconds from a raw video. Preview and determine when the actual content starts\n";
+    print "\nUsage: $0 FILE (must be mp4) TIME (in seconds)\n";
+    print "Eg: $0 openofficeT1514.mp4 234\n";
+    exit();
+}
