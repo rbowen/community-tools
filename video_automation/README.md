@@ -12,9 +12,10 @@ To use generate_title you might need to:
     sudo cpan install Text::Wrap
     sudo cpan install Getopt::Long
 
-You will also need to have `mlt-melt` installed. On Fedora, that's:
+You will also need to have `mlt-melt` and ImageMagick installed. On Fedora, that's:
 
     sudo dnf install mlt
+    sudo dnf install ImageMagick
 
 Next, you need to create the following files:
 
@@ -52,4 +53,14 @@ Generate the final video using:
 
 This will generate `raw_video_final.mp4` which will contain all of the
 various components, in order.
+
+## Credit
+
+Credit where due:
+
+`trim` stuff came from https://www.arj.no/2018/05/18/trimvideo/
+
+All of the `mlt` tricks came from Brian Proffitt.
+
+The `generate_title` stuff all came from the ImageMagick docs.
 
