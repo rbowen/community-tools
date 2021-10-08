@@ -30,7 +30,7 @@ Trim off any dead air at the beginning of the video:
 
     ./trim raw_video.mp4 123
 
-Generate the title card using generate_title
+Generate the title card using `generate_title`
 
     ./generate_title "Title" "Speaker(s)"
 
@@ -38,7 +38,6 @@ Generate the final video using:
 
     ./merge_all raw_video.mp4
 
-This will generate raw_video_final.mp4 which will contain all of the
+This will generate `raw_video_final.mp4` which will contain all of the
 various components, in order.
-
 
