@@ -18,7 +18,7 @@ You will also need to have `mlt-melt` installed. On Fedora, that's:
 
 Next, you need to create the following files:
 
-    TEMPLATE_TITLE.png
+    template_title.png
     endcard.png
     preroll.mp4 (optional)
 

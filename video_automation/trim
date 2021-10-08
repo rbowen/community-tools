@@ -11,6 +11,12 @@ help() if $help;
 my $file = $ARGV[0] || help();
 my $time = $ARGV[1] || help();
 
+my $end = $ARGV[2] ? " -to $ARGV[2] " : '';
+
+if ($end) {
+    $end = " -to \"$end\" ";
+}
+
 unless (-e $file) {
     print "Can't find file '$file'\n";
     help();
@@ -27,13 +33,28 @@ my $trimmed = $file . "_edit.mp4";
 my $bak = $file . "_bak.mp4";
 
 # ok, now the nasty work
-qx/ffmpeg -noaccurate_seek -ss $time -i $orig -c copy $trimmed/;
+qx/ffmpeg -noaccurate_seek -i $orig -ss "$time" $end -c copy $trimmed/;
 qx/mv $orig $bak/;
 qx/mv $trimmed $orig/;
 
-sub help {
-    print "\nTrims the first n seconds from a raw video. Preview and determine when the actual content starts\n";
-    print "\nUsage: $0 FILE (must be mp4) TIME (in seconds)\n";
-    print "Eg: $0 openofficeT1514.mp4 234\n";
+sub help  {
+
+print qq~
+Trims the first n seconds from a raw video. Preview and determine when the actual content starts
+Usage: $0 FILE (must be mp4) TIME
+Eg: $0 openofficeT1514.mp4 00:00:14
+
+You can also optionally provide an end time to trim dead air at the end.
+
+Times should be provided as hh:mm:ss (eg '00:01:34')
+
+NOTE: Your original file will be preserved as whatever_bak.mp4, in case
+you screw up.
+
+WARNING: This script does not, at this time, validate your time format,
+so it will probably just silently fail if you do that wrong. Error
+checking to be added soon.
+
+~;
     exit();
 }
