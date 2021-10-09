@@ -2,33 +2,40 @@
 use strict;
 use warnings;
 use Getopt::Long qw(GetOptions);
+use POSIX qw(strftime);
 
 use Text::Wrap;
-$Text::Wrap::columns = 50;
-my $fontsize = 35;
+$Text::Wrap::columns = 45;
 
 my $help = 0;
 
 GetOptions( "help" => \$help ) or help();
 help() if $help;
 
-my $title  = $ARGV[0] || help();
-my $author = $ARGV[1] || help();
-my $wrap_title = wrap( '', '', $title );
+my $event_date = strftime "%B %G", localtime;
+my $event_template = $ARGV[0] || help();
+my $event_name = $ARGV[1] || help();
+my $presentation_title  = $ARGV[2] || help();
+my $presentation_author = $ARGV[3] || help();
+my $presentation_title_wrapped = wrap( '', '', $presentation_title );
 
-unless (-e 'template_title.png') {
-    print "template_title.png is missing. See template_title_EXAMPLE.png for an example of the correct file size for YouTube videos.";
+unless (-e $event_template) {
+    print "$event_template is missing. See template_title_EXAMPLE.png for an example of the correct file size for YouTube videos.";
     help();
 }
 
-qx/convert template_title.png -font Montserrat-Regular -pointsize $fontsize -annotate +75+350 \"$wrap_title\n\n$author\" titlecard.png/;
+qx/convert $event_template -fill \"#ffffff\" -font Montserrat-Bold -pointsize 72 -annotate +353+198 \"$event_name\" titlecard.png/;
+qx/mogrify -fill \"#ffffff\" -font Montserrat-Regular -pointsize 35 -annotate +353+255 \"$event_date\" titlecard.png/;
+qx/mogrify -fill \"#000000\" -font Montserrat-Bold -pointsize 42 -annotate +67+420 \"$presentation_title_wrapped\" titlecard.png/;
+qx/mogrify -fill \"#000000\" -font Montserrat-Regular -pointsize 35 -annotate +67+560 \"$presentation_author\" titlecard.png/;
+
 
 sub help {
 
 print qq~
 Given a template_title.png file, a title, and a speaker name, generates the title card for a YouTube video.
-Usage: $0 "TITLE" "SPEAKER"
-Eg: $0 "Introduction to ponies" "Rich Bowen"
+Usage: $0 "TEMPLATE FILE" "EVENT NAME" "PRESENTATION TITLE" "PRESENTATION SPEAKER"
+Eg: $0 "template_title_cs9.png" "Wonderland" "Introduction to ponies" "Rich Bowen"
 
 ~;
     exit();

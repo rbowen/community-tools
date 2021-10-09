@@ -15,6 +15,8 @@ To use generate_title you might need to:
 You will also need to have `mlt-melt` and ImageMagick installed. On Fedora, that's:
 
     sudo dnf install mlt
+    sudo dnf install mlt-freeworld # MP4 support, available in rpmfusion repo.
+    sudo dnf install newt
     sudo dnf install ImageMagick
 
 Next, you need to create the following files:
@@ -45,7 +47,7 @@ this part wrong.
 
 Generate the title card using `generate_title`
 
-    ./generate_title "Title" "Speaker(s)"
+    ./generate_title "Template File" "Event Name" "Title" "Speaker(s)"
 
 Generate the final video using:
 
@@ -53,6 +55,10 @@ Generate the final video using:
 
 This will generate `raw_video_final.mp4` which will contain all of the
 various components, in order.
+
+In case you prefer a guided step-by-step flow, run:
+
+    ./generate.sh
 
 ## Credit
 
