@@ -32,13 +32,10 @@ help("End time doesn't look like a valid time.") unless ( $end =~ m/"\d\d:\d\d:\
 
 $file =~ s/\.mp4$//;
 my $orig    = $file . ".mp4";
-my $trimmed = $file . "_edit.mp4";
-my $bak     = $file . "_bak.mp4";
+my $trimmed = $file . "_trimmed.mp4";
 
 # ok, now the nasty work
 qx/ffmpeg -noaccurate_seek -ss "$time" $end -i $orig -c copy $trimmed/;
-qx/mv $orig $bak/;
-qx/mv $trimmed $orig/;
 
 sub help {
     my @ARGS = @_;
@@ -54,16 +51,14 @@ Trims a video given start, and, optionally, end time. Preview and determine when
 
 $0 FILE (must be mp4) TIME1 [TIME2]
 
-Eg: $0 openofficeT1514.mp4 00:00:14
+Eg: $0 openofficeT1514.mp4 00:00:14 (Trims just the beginning)
 
-You can optionally provide an end time to trim dead air at the end.
-
-Eg: $0 openofficeT1514.mp4 00:00:14 00:55:47
+Eg: $0 openofficeT1514.mp4 00:00:14 00:55:47 (Trims beginning and end)
 
 Times should be provided as hh:mm:ss (eg '00:01:34')
 
-NOTE: Your original file will be preserved as whatever_bak.mp4, in case
-you screw up.
+Trimming is non-destructive - that is, the original file is untouched,
+and the trimmed version will be named whatever_trimmed.mp4
 
 ~;
     exit();
